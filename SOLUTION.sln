@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "video", "video", "{9CBB7A81
 		resource\video\Presentation1.gif = resource\video\Presentation1.gif
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "preview-yaml.vs", "application\preview-yaml.vs\preview-yaml.vs.csproj", "{C22FAD1B-7CE3-4552-9A2A-2D5AFFC51BAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "preview-yaml.vs", "application\preview-yaml.vs\preview-yaml.vs.csproj", "{7C7BE15E-0943-4696-B62F-946191923E00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C22FAD1B-7CE3-4552-9A2A-2D5AFFC51BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C22FAD1B-7CE3-4552-9A2A-2D5AFFC51BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C22FAD1B-7CE3-4552-9A2A-2D5AFFC51BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C22FAD1B-7CE3-4552-9A2A-2D5AFFC51BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7BE15E-0943-4696-B62F-946191923E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7BE15E-0943-4696-B62F-946191923E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7BE15E-0943-4696-B62F-946191923E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7BE15E-0943-4696-B62F-946191923E00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,7 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6F1CDBEC-8284-4F1D-A232-2CAEEC410108} = {B897641E-4668-4D18-9680-D29491DEB224}
 		{9CBB7A81-0908-47B3-9CEB-29DA5CD08988} = {B897641E-4668-4D18-9680-D29491DEB224}
-		{C22FAD1B-7CE3-4552-9A2A-2D5AFFC51BAE} = {111DE3AB-A29F-47EE-BEE4-7BB8DF08CF0B}
+		{7C7BE15E-0943-4696-B62F-946191923E00} = {111DE3AB-A29F-47EE-BEE4-7BB8DF08CF0B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1BB0EA6-6A4F-4731-8167-0CD6174DFD42}

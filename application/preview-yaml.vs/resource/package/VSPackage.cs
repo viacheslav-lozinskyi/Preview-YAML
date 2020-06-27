@@ -24,7 +24,7 @@ namespace resource.package
             public const string DESCRIPTION = "Quick preview of YAML files";
             public const string EXTENSION1 = ".YML";
             public const string EXTENSION2 = ".YAML";
-            public const string GUID = "60C2A21A-146A-4FEC-AFF3-60CA87C21228";
+            public const string GUID = "C34A1A6D-E95B-4EB2-A0CB-7CF85D72AAF0";
             public const string NAME = "Preview-YAML";
             public const string VERSION = "1.0.1";
         }
