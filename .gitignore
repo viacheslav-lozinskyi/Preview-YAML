@@ -1,3 +1,4 @@
 /.vs
 /output
 /application/preview-yaml.vs/obj
+/application/preview-yaml.vs/*.user
