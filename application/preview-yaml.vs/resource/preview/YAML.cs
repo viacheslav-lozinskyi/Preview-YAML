@@ -46,7 +46,6 @@ namespace resource.preview
                     SetValue(__GetValue(node)).
                     SetComment(__GetComment(node, pattern)).
                     SetPattern(__GetPattern(node, pattern)).
-                    SetFlag((level <= 1) ? atom.Trace.NAME.FLAG.EXPAND : "").
                     SetHint("[[Data type]]").
                     SetLevel(level).
                     Send();
