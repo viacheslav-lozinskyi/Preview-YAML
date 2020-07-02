@@ -108,17 +108,17 @@ namespace resource.preview
         {
             if (node is IList)
             {
-                return "Array";
+                return "[[Array]]";
             }
             if (node is IDictionary)
             {
-                return "Object";
+                return "[[Object]]";
             }
             if (pattern == atom.Trace.NAME.PATTERN.PARAMETER)
             {
-                return "Property";
+                return "[[Property]]";
             }
-            return "Item";
+            return "[[Item]]";
         }
 
         private static string __GetPattern(object node, string pattern)
