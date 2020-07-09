@@ -23,7 +23,7 @@ namespace resource.preview
                 context.
                     Clear().
                     SetContent(__GetMessage(ex.Message)).
-                    SetFlag(atom.Trace.NAME.FLAG.ERROR).
+                    SetFlag(NAME.FLAG.ERROR).
                     SetUrl(url).
                     SetLine(ex.Start.Line).
                     SetPosition(ex.Start.Column).
@@ -70,7 +70,7 @@ namespace resource.preview
                         a_Index++;
                     }
                     {
-                        __Execute(a_Context1, level + 1, context, "[" + a_Index.ToString() + "]", atom.Trace.NAME.PATTERN.VARIABLE, ref trail);
+                        __Execute(a_Context1, level + 1, context, "[" + a_Index.ToString() + "]", NAME.PATTERN.VARIABLE, ref trail);
                     }
                 }
             }
@@ -79,7 +79,7 @@ namespace resource.preview
                 var a_Context = node as IDictionary;
                 foreach (string a_Context1 in a_Context.Keys)
                 {
-                    __Execute(a_Context[a_Context1], level + 1, context, a_Context1, atom.Trace.NAME.PATTERN.PARAMETER, ref trail);
+                    __Execute(a_Context[a_Context1], level + 1, context, a_Context1, NAME.PATTERN.PARAMETER, ref trail);
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace resource.preview
             {
                 return "[[Object]]";
             }
-            if (pattern == atom.Trace.NAME.PATTERN.PARAMETER)
+            if (pattern == NAME.PATTERN.PARAMETER)
             {
                 return "[[Property]]";
             }
