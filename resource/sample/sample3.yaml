@@ -1,0 +1,9 @@
+aliases:
+ - &myAlias1
+   datakey: dataval 1
+   moredata: morevals 1
+ - &myAlias2
+   datakey: dataval 2
+   moredata: morevals 2
+config:
+ - *myAlias1
