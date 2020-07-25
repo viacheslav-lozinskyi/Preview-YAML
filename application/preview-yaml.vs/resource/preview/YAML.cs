@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace resource.preview
@@ -15,26 +16,31 @@ namespace resource.preview
             {
                 var a_Context1 = "";
                 {
-                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, 0, context, "", "", ref a_Context1);
+                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, 0, context, "", NAME.PATTERN.ELEMENT, ref a_Context1);
+                }
+                if (GetState() == STATE.CANCEL)
+                {
+                    context.
+                        SendWarning(1, NAME.WARNING.TERMINATED);
                 }
             }
-            catch (YamlDotNet.Core.YamlException ex)
+            catch (YamlException ex)
             {
                 context.
-                    Clear().
-                    SetContent(__GetMessage(ex.Message)).
-                    SetFlag(NAME.FLAG.ERROR).
                     SetUrl(url).
                     SetLine(ex.Start.Line).
                     SetPosition(ex.Start.Column).
-                    SetLevel(1).
-                    Send();
+                    SendError(1, __GetErrorMessage(ex.Message));
             }
         }
 
         private static void __Execute(Object node, int level, atom.Trace context, string name, string pattern, ref string trail)
         {
             if (node == null)
+            {
+                return;
+            }
+            if (GetState() == STATE.CANCEL)
             {
                 return;
             }
@@ -84,7 +90,7 @@ namespace resource.preview
             }
         }
 
-        private static string __GetMessage(string value)
+        private static string __GetErrorMessage(string value)
         {
             var a_Index = value.IndexOf("): ");
             if (a_Index > 0)
@@ -124,7 +130,7 @@ namespace resource.preview
         {
             if ((node is IList) || (node is IDictionary))
             {
-                return "";
+                return NAME.PATTERN.ELEMENT;
             }
             return pattern;
         }
