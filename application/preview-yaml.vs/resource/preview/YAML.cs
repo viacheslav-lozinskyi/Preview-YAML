@@ -28,8 +28,8 @@ namespace resource.preview
             {
                 context.
                     SetUrl(url).
-                    SetLine(ex.Start.Line).
-                    SetPosition(ex.Start.Column).
+                    SetUrlLine(ex.Start.Line).
+                    SetUrlPosition(ex.Start.Column).
                     SendError(1, __GetErrorMessage(ex.Message));
             }
         }
@@ -52,7 +52,7 @@ namespace resource.preview
                     SetValue(__GetValue(node)).
                     SetComment(__GetComment(node, pattern)).
                     SetPattern(__GetPattern(node, pattern)).
-                    SetHint("[[Data type]]").
+                    SetCommentHint("[[Data type]]").
                     SetLevel(level).
                     Send();
             }
