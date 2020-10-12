@@ -11,11 +11,7 @@ namespace resource.package
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration(CONSTANT.NAME, CONSTANT.DESCRIPTION, CONSTANT.VERSION)]
     [Guid(CONSTANT.GUID)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.FirstLaunchSetup_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionExists_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasMultipleProjects_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionHasSingleProject_string, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class PreviewYAMLPackage : AsyncPackage
     {
         internal static class CONSTANT
@@ -26,16 +22,18 @@ namespace resource.package
             public const string EXTENSION2 = ".YAML";
             public const string GUID = "C34A1A6D-E95B-4EB2-A0CB-7CF85D72AAF0";
             public const string NAME = "Preview-YAML";
-            public const string VERSION = "1.0.4";
+            public const string VERSION = "1.0.5";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             {
                 cartridge.AnyPreview.Connect();
                 cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION1, new preview.YAML());
                 cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION2, new preview.YAML());
+            }
+            {
+                await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             }
         }
 
