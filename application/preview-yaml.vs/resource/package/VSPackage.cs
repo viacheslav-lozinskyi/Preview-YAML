@@ -22,15 +22,15 @@ namespace resource.package
             public const string EXTENSION2 = ".YAML";
             public const string GUID = "C34A1A6D-E95B-4EB2-A0CB-7CF85D72AAF0";
             public const string NAME = "Preview-YAML";
-            public const string VERSION = "1.0.5";
+            public const string VERSION = "1.0.6";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             {
                 cartridge.AnyPreview.Connect();
-                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION1, new preview.YAML());
-                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION2, new preview.YAML());
+                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION1, new preview.VSPreview());
+                cartridge.AnyPreview.Register(cartridge.AnyPreview.MODE.PREVIEW, CONSTANT.EXTENSION2, new preview.VSPreview());
             }
             {
                 await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);

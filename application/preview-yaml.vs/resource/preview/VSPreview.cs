@@ -7,7 +7,7 @@ using YamlDotNet.Serialization;
 
 namespace resource.preview
 {
-    public class YAML : cartridge.AnyPreview
+    internal class VSPreview : cartridge.AnyPreview
     {
         protected override void _Execute(atom.Trace context, string url)
         {
@@ -16,7 +16,7 @@ namespace resource.preview
             {
                 var a_Context1 = "";
                 {
-                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, 0, context, "", NAME.PATTERN.ELEMENT, ref a_Context1);
+                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, 0, context, "", NAME.TYPE.INFO, ref a_Context1);
                 }
                 if (GetState() == STATE.CANCEL)
                 {
@@ -34,7 +34,7 @@ namespace resource.preview
             }
         }
 
-        private static void __Execute(Object node, int level, atom.Trace context, string name, string pattern, ref string trail)
+        private static void __Execute(Object node, int level, atom.Trace context, string name, string type, ref string trail)
         {
             if (node == null)
             {
@@ -47,11 +47,10 @@ namespace resource.preview
             if (string.IsNullOrEmpty(name) == false)
             {
                 context.
-                    Clear().
                     SetContent(name).
                     SetValue(__GetValue(node)).
-                    SetComment(__GetComment(node, pattern)).
-                    SetPattern(__GetPattern(node, pattern)).
+                    SetComment(__GetComment(node, type)).
+                    SetType(__GetType(node, type)).
                     SetCommentHint("[[Data type]]").
                     SetLevel(level).
                     Send();
@@ -76,7 +75,7 @@ namespace resource.preview
                         a_Index++;
                     }
                     {
-                        __Execute(a_Context1, level + 1, context, "[" + a_Index.ToString() + "]", NAME.PATTERN.VARIABLE, ref trail);
+                        __Execute(a_Context1, level + 1, context, "[" + a_Index.ToString() + "]", NAME.TYPE.VARIABLE, ref trail);
                     }
                 }
             }
@@ -85,7 +84,7 @@ namespace resource.preview
                 var a_Context = node as IDictionary;
                 foreach (string a_Context1 in a_Context.Keys)
                 {
-                    __Execute(a_Context[a_Context1], level + 1, context, a_Context1, NAME.PATTERN.PARAMETER, ref trail);
+                    __Execute(a_Context[a_Context1], level + 1, context, a_Context1, NAME.TYPE.PARAMETER, ref trail);
                 }
             }
         }
@@ -109,7 +108,7 @@ namespace resource.preview
             return GetCleanString(node.ToString());
         }
 
-        private static string __GetComment(object node, string pattern)
+        private static string __GetComment(object node, string type)
         {
             if (node is IList)
             {
@@ -119,20 +118,20 @@ namespace resource.preview
             {
                 return "[[Object]]";
             }
-            if (pattern == NAME.PATTERN.PARAMETER)
+            if (type == NAME.TYPE.PARAMETER)
             {
                 return "[[Property]]";
             }
             return "[[Item]]";
         }
 
-        private static string __GetPattern(object node, string pattern)
+        private static string __GetType(object node, string type)
         {
             if ((node is IList) || (node is IDictionary))
             {
-                return NAME.PATTERN.ELEMENT;
+                return NAME.TYPE.INFO;
             }
-            return pattern;
+            return type;
         }
     };
 }
