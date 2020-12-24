@@ -9,28 +9,24 @@ namespace resource.preview
 {
     internal class VSPreview : cartridge.AnyPreview
     {
-        protected override void _Execute(atom.Trace context, string url)
+        protected override void _Execute(atom.Trace context, string url, int level)
         {
             var a_Context = new Deserializer();
             try
             {
                 var a_Context1 = "";
                 {
-                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, 0, context, "", NAME.TYPE.INFO, ref a_Context1);
-                }
-                if (GetState() == STATE.CANCEL)
-                {
-                    context.
-                        SendWarning(1, NAME.WARNING.TERMINATED);
+                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, level - 1, context, "", NAME.TYPE.INFO, ref a_Context1);
                 }
             }
             catch (YamlException ex)
             {
                 context.
-                    SetUrl(url).
+                    SetUrl(url, "").
                     SetUrlLine(ex.Start.Line).
                     SetUrlPosition(ex.Start.Column).
-                    SendError(1, __GetErrorMessage(ex.Message));
+                    Send(NAME.SOURCE.PREVIEW, NAME.TYPE.ERROR, level, __GetErrorMessage(ex.Message)).
+                    SendPreview(NAME.TYPE.ERROR, url);
             }
         }
 
@@ -47,13 +43,8 @@ namespace resource.preview
             if (string.IsNullOrEmpty(name) == false)
             {
                 context.
-                    SetContent(name).
-                    SetValue(__GetValue(node)).
-                    SetComment(__GetComment(node, type)).
-                    SetType(__GetType(node, type)).
-                    SetCommentHint("[[Data type]]").
-                    SetLevel(level).
-                    Send();
+                    SetComment(__GetComment(node, type), "[[Data type]]").
+                    Send(NAME.SOURCE.PREVIEW, __GetType(node, type), level, name, __GetValue(node));
             }
             {
                 var a_Context = node.GetHashCode() + ";";

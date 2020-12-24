@@ -22,7 +22,7 @@ namespace resource.package
             public const string EXTENSION2 = ".YAML";
             public const string GUID = "C34A1A6D-E95B-4EB2-A0CB-7CF85D72AAF0";
             public const string NAME = "Preview-YAML";
-            public const string VERSION = "1.0.6";
+            public const string VERSION = "1.0.7";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
