@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections;
 using System.IO;
 using YamlDotNet.Core;
@@ -7,47 +5,45 @@ using YamlDotNet.Serialization;
 
 namespace resource.preview
 {
-    internal class VSPreview : cartridge.AnyPreview
+    internal class VSPreview : extension.AnyPreview
     {
-        protected override void _Execute(atom.Trace context, string url, int level)
+        protected override void _Execute(atom.Trace context, int level, string url, string file)
         {
             var a_Context = new Deserializer();
             try
             {
                 var a_Context1 = "";
                 {
-                    __Execute(a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(url))) as IEnumerable, level - 1, context, "", NAME.TYPE.INFO, ref a_Context1);
+                    __Execute(context, level - 1, a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(file))) as IEnumerable, "", NAME.TYPE.PARAMETER, ref a_Context1);
                 }
             }
             catch (YamlException ex)
             {
                 context.
-                    SetUrl(url, "").
-                    SetUrlLine(ex.Start.Line).
-                    SetUrlPosition(ex.Start.Column).
-                    Send(NAME.SOURCE.PREVIEW, NAME.TYPE.ERROR, level, __GetErrorMessage(ex.Message)).
-                    SendPreview(NAME.TYPE.ERROR, url);
+                    SetUrl(file, ex.Start.Line, ex.Start.Column).
+                    Send(NAME.SOURCE.PREVIEW, NAME.TYPE.EXCEPTION, level, __GetErrorMessage(ex.Message)).
+                    SendPreview(NAME.TYPE.EXCEPTION, url);
             }
         }
 
-        private static void __Execute(Object node, int level, atom.Trace context, string name, string type, ref string trail)
+        private static void __Execute(atom.Trace context, int level, object data, string name, string type, ref string trail)
         {
-            if (node == null)
+            if (data == null)
             {
                 return;
             }
-            if (GetState() == STATE.CANCEL)
+            if (GetState() == NAME.STATE.CANCEL)
             {
                 return;
             }
             if (string.IsNullOrEmpty(name) == false)
             {
                 context.
-                    SetComment(__GetComment(node, type), "[[Data type]]").
-                    Send(NAME.SOURCE.PREVIEW, __GetType(node, type), level, name, __GetValue(node));
+                    SetComment(__GetComment(data, type), "[[[Data Type]]]").
+                    Send(NAME.SOURCE.PREVIEW, __GetType(data, type), level, name, __GetValue(data));
             }
             {
-                var a_Context = node.GetHashCode() + ";";
+                var a_Context = data.GetHashCode() + ";";
                 if (trail.Contains(a_Context))
                 {
                     return;
@@ -56,9 +52,9 @@ namespace resource.preview
                     trail += a_Context;
                 }
             }
-            if (node is IList)
+            if (data is IList)
             {
-                var a_Context = node as IList;
+                var a_Context = data as IList;
                 var a_Index = 0;
                 foreach (var a_Context1 in a_Context)
                 {
@@ -66,61 +62,61 @@ namespace resource.preview
                         a_Index++;
                     }
                     {
-                        __Execute(a_Context1, level + 1, context, "[" + a_Index.ToString() + "]", NAME.TYPE.VARIABLE, ref trail);
+                        __Execute(context, level + 1, a_Context1, "[" + a_Index.ToString() + "]", NAME.TYPE.PARAMETER, ref trail);
                     }
                 }
             }
-            if (node is IDictionary)
+            if (data is IDictionary)
             {
-                var a_Context = node as IDictionary;
+                var a_Context = data as IDictionary;
                 foreach (string a_Context1 in a_Context.Keys)
                 {
-                    __Execute(a_Context[a_Context1], level + 1, context, a_Context1, NAME.TYPE.PARAMETER, ref trail);
+                    __Execute(context, level + 1, a_Context[a_Context1], a_Context1, NAME.TYPE.PARAMETER, ref trail);
                 }
             }
         }
 
-        private static string __GetErrorMessage(string value)
+        private static string __GetErrorMessage(string data)
         {
-            var a_Index = value.IndexOf("): ");
+            var a_Index = data.IndexOf("): ");
             if (a_Index > 0)
             {
-                return GetCleanString(value.Substring(a_Index + 3));
+                return GetFinalText(data.Substring(a_Index + 3));
             }
-            return value;
+            return data;
         }
 
-        private static string __GetValue(object node)
+        private static string __GetValue(object data)
         {
-            if ((node is IList) || (node is IDictionary))
+            if ((data is IList) || (data is IDictionary))
             {
                 return "";
             }
-            return GetCleanString(node.ToString());
+            return GetFinalText(data.ToString());
         }
 
-        private static string __GetComment(object node, string type)
+        private static string __GetComment(object data, string type)
         {
-            if (node is IList)
+            if (data is IList)
             {
-                return "[[Array]]";
+                return "[[[Array]]]";
             }
-            if (node is IDictionary)
+            if (data is IDictionary)
             {
-                return "[[Object]]";
+                return "[[[Object]]]";
             }
             if (type == NAME.TYPE.PARAMETER)
             {
-                return "[[Property]]";
+                return "[[[Property]]]";
             }
-            return "[[Item]]";
+            return "[[[Item]]]";
         }
 
-        private static string __GetType(object node, string type)
+        private static string __GetType(object data, string type)
         {
-            if ((node is IList) || (node is IDictionary))
+            if ((data is IList) || (data is IDictionary))
             {
-                return NAME.TYPE.INFO;
+                return NAME.TYPE.PARAMETER;
             }
             return type;
         }
