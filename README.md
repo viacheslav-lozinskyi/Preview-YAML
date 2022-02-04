@@ -8,6 +8,12 @@
 
 ---
 
+[![MetaOutput](https://www.metaoutput.net/_functions/watch?source=GITHUB&size=128x128&project=Preview-YAML&url=https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.Preview-YAML)](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=Preview-YAML)
+
+### This extension is working only with installed [MetaOutput](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=Preview-YAML) extension!
+
+---
+
 ### Now you can look inside [YAML](https://en.wikipedia.org/wiki/YAML) file not opening it.
 
 ---
@@ -16,16 +22,6 @@
 
 ---
 
-Download the extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.Preview-YAML)
-
----
-
-Data visualization is based on [MetaOutput](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=preview-yaml)
+Data visualization is based on [MetaOutput](https://www.metaoutput.net/?utm_source=github.com&utm_medium=referral&utm_campaign=redirect-to-homepage&utm_term=2021-11-21&utm_content=Preview-YAML)
 
 Data extraction is based on [YamlDotNet](https://github.com/aaubry/YamlDotNet)
-
----
-
-## WARNING:
-
-Correct work of this extension in **Visual Studio 2022** is possible when **[MetaOutput 2022](https://marketplace.visualstudio.com/items?itemName=ViacheslavLozinskyi.MetaOutput-2022)** extension is installed.
