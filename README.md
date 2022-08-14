@@ -8,7 +8,7 @@
 
 ---
 
-[![MetaOutput](https://www.metaoutput.net/_functions/watch?utm_source=github.com&utm_medium=referral&utm_campaign=view-on-github&utm_term=2022-02-09&utm_content=Preview-YAML&source=GITHUB&size=128x128&project=Preview-YAML&url=https://github.com/viacheslav-lozinskyi/Preview-YAML)](https://www.metaoutput.net/)
+[![MetaOutput](https://www.metaoutput.net/_functions/watch?utm_source=github.com&utm_medium=referral&utm_campaign=view-on-github&utm_content=Preview-YAML&source=GITHUB&size=128x128&project=Preview-YAML&url=https://github.com/viacheslav-lozinskyi/Preview-YAML)](https://www.metaoutput.net/)
 
 ### This extension is working only with installed [MetaOutput](https://www.metaoutput.net/) extension!
 
