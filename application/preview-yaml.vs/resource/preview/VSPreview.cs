@@ -14,15 +14,15 @@ namespace resource.preview
             {
                 var a_Context1 = "";
                 {
-                    __Execute(context, level - 1, a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(file))) as IEnumerable, "", NAME.TYPE.PARAMETER, ref a_Context1);
+                    __Execute(context, level - 1, a_Context.Deserialize<dynamic>(new StringReader(File.ReadAllText(file))) as IEnumerable, "", NAME.EVENT.PARAMETER, ref a_Context1);
                 }
             }
             catch (YamlException ex)
             {
                 context.
                     SetUrl(file, ex.Start.Line, ex.Start.Column).
-                    Send(NAME.SOURCE.PREVIEW, NAME.TYPE.EXCEPTION, level, __GetErrorMessage(ex.Message)).
-                    SendPreview(NAME.TYPE.EXCEPTION, url);
+                    Send(NAME.SOURCE.PREVIEW, NAME.EVENT.EXCEPTION, level, __GetErrorMessage(ex.Message)).
+                    SendPreview(NAME.EVENT.EXCEPTION, url);
             }
         }
 
@@ -62,7 +62,7 @@ namespace resource.preview
                         a_Index++;
                     }
                     {
-                        __Execute(context, level + 1, a_Context1, "[" + a_Index.ToString() + "]", NAME.TYPE.PARAMETER, ref trail);
+                        __Execute(context, level + 1, a_Context1, "[" + a_Index.ToString() + "]", NAME.EVENT.PARAMETER, ref trail);
                     }
                 }
             }
@@ -71,7 +71,7 @@ namespace resource.preview
                 var a_Context = data as IDictionary;
                 foreach (string a_Context1 in a_Context.Keys)
                 {
-                    __Execute(context, level + 1, a_Context[a_Context1], a_Context1, NAME.TYPE.PARAMETER, ref trail);
+                    __Execute(context, level + 1, a_Context[a_Context1], a_Context1, NAME.EVENT.PARAMETER, ref trail);
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace resource.preview
             {
                 return "[[[Object]]]";
             }
-            if (type == NAME.TYPE.PARAMETER)
+            if (type == NAME.EVENT.PARAMETER)
             {
                 return "[[[Property]]]";
             }
@@ -116,7 +116,7 @@ namespace resource.preview
         {
             if ((data is IList) || (data is IDictionary))
             {
-                return NAME.TYPE.PARAMETER;
+                return NAME.EVENT.PARAMETER;
             }
             return type;
         }
