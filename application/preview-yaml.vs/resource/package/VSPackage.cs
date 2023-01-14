@@ -24,7 +24,7 @@ namespace resource.package
             public const string DESCRIPTION = "Quick preview of YAML files";
             public const string GUID = "C34A1A6D-E95B-4EB2-A0CB-7CF85D72AAF0";
             public const string NAME = "Preview-YAML";
-            public const string VERSION = "1.0.12";
+            public const string VERSION = "1.0.13";
         }
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
