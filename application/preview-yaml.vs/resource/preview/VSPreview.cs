@@ -32,7 +32,7 @@ namespace resource.preview
             {
                 return;
             }
-            if (GetState() == NAME.STATE.CANCEL)
+            if (GetState() == NAME.STATE.WORK.CANCEL)
             {
                 return;
             }
